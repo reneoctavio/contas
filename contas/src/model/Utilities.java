@@ -3,6 +3,8 @@
  */
 package model;
 
+import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 /**
@@ -155,5 +157,45 @@ public class Utilities {
 	} catch (InputMismatchException erro) {
 	    return (false);
 	}
+    }
+
+    /**
+     * Check if a number is in the correct size and it is an integer
+     * 
+     * @param inNum
+     *            The input number
+     * @param size
+     *            The size of the number
+     * @return Whether the number is valid or not
+     */
+    public static boolean isValidNumber(String inNum, int size) {
+	// If the given string is not an integer return false
+	if (!isInteger(inNum))
+	    return false;
+
+	// If the length of the number is less than 0 and greater than given
+	// size, return false
+	if ((inNum.length() < 0) || (inNum.length() > size)) {
+	    return false;
+	}
+	return true;
+    }
+
+    /**
+     * Standardize bank number code to match the given length adding leading
+     * zeros if needed
+     * 
+     * @param inNum
+     *            A string containing the number of the bank
+     * @return Whether the input number is correct
+     */
+    public static String standardizeNumber(String inNum, int size) {
+	// Adding leading zeros if needed
+	char[] zeros = new char[size];
+	Arrays.fill(zeros, '0');
+
+	// Create a decimal format to match the length of the string
+	DecimalFormat df = new DecimalFormat(String.valueOf(zeros));
+	return df.format(Integer.getInteger(inNum));
     }
 }
