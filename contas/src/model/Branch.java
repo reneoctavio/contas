@@ -18,7 +18,7 @@ public class Branch {
 
     public Branch(String inNum, String inBankNum) throws IOException {
 	setBranchNum(inNum);
-	this.bankNum = inBankNum;
+	setBankNum(inBankNum);
     }
 
     /**
@@ -51,9 +51,11 @@ public class Branch {
     /**
      * @param bankNum
      *            the bankNum to set
+     * @throws IOException
      */
-    public void setBankNum(String bankNum) {
-	this.bankNum = bankNum;
+    public void setBankNum(String bankNum) throws IOException {
+	Bank bank = new Bank(bankNum, null);
+	this.bankNum = bank.getNumber();
     }
 
 }

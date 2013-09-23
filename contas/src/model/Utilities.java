@@ -3,8 +3,6 @@
  */
 package model;
 
-import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 
 /**
@@ -190,12 +188,6 @@ public class Utilities {
      * @return Whether the input number is correct
      */
     public static String standardizeNumber(String inNum, int size) {
-	// Adding leading zeros if needed
-	char[] zeros = new char[size];
-	Arrays.fill(zeros, '0');
-
-	// Create a decimal format to match the length of the string
-	DecimalFormat df = new DecimalFormat(String.valueOf(zeros));
-	return df.format(Integer.getInteger(inNum));
+	return String.format("%0" + size + "d", Integer.parseInt(inNum));
     }
 }

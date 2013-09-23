@@ -38,7 +38,9 @@ public class Database {
 	// state of the db.
 	// It can contain directory names relative to the
 	// current working directory
-	conn = DriverManager.getConnection("jdbc:hsqldb:DB", "sa", "");
+	conn = DriverManager.getConnection(
+		"jdbc:hsqldb:file:../contas/bin/database/db;shutdown=true",
+		"sa", "");
     }
 
     public void shutdown() throws SQLException {

@@ -34,15 +34,16 @@ public class Check {
      * @throws IOException
      */
     public Check(String number, String customer, String bank, String branch,
-	    BigDecimal value, Date issueDate, Date dueDate) throws IOException {
+	    BigDecimal value, Date issueDate, Date dueDate, boolean isCashed)
+	    throws IOException {
 	setNumber(number);
-	this.customer = customer;
-	this.bank = bank;
-	this.branch = branch;
+	setCustomer(customer);
+	setBank(bank);
+	setBranch(branch);
 	this.value = value;
 	this.issueDate = issueDate;
 	this.dueDate = dueDate;
-	this.isCashed = false;
+	this.isCashed = isCashed;
     }
 
     /**
@@ -62,7 +63,6 @@ public class Check {
 	    this.number = Utilities.standardizeNumber(number, CHECK_NUM_LENGTH);
 	else
 	    throw new IOException("Invalid number!");
-	this.number = number;
     }
 
     /**
@@ -75,9 +75,11 @@ public class Check {
     /**
      * @param customer
      *            the customer to set
+     * @throws IOException
      */
-    public void setCustomer(String customer) {
-	this.customer = customer;
+    public void setCustomer(String customer) throws IOException {
+	Customer cust = new Customer(customer, null);
+	this.customer = cust.getIdNumber();
     }
 
     /**
@@ -90,9 +92,11 @@ public class Check {
     /**
      * @param bank
      *            the bank to set
+     * @throws IOException
      */
-    public void setBank(String bank) {
-	this.bank = bank;
+    public void setBank(String bank) throws IOException {
+	Bank bnk = new Bank(bank, null);
+	this.bank = bnk.getNumber();
     }
 
     /**
@@ -105,9 +109,11 @@ public class Check {
     /**
      * @param branch
      *            the branch to set
+     * @throws IOException
      */
-    public void setBranch(String branch) {
-	this.branch = branch;
+    public void setBranch(String branch) throws IOException {
+	Branch brch = new Branch(branch, this.bank);
+	this.branch = brch.getBranchNum();
     }
 
     /**

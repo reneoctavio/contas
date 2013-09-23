@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Customer {
 
-    enum TypeID {
+    public enum TypeID {
 	CPF, CNPJ;
     }
 
